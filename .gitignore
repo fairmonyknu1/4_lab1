@@ -1,3 +1,6 @@
+.venv
+.idea
+
 ### Maven template
 target/
 pom.xml.tag
