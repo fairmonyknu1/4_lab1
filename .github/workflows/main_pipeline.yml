@@ -32,7 +32,7 @@ jobs:
 
       - name: Run Unit Tests
         run: |
-          python manage.py test --verbosity=2 --testrunner=xmlrunner.extra.djangotestrunner.XMLTestRunner --output-file=test-results.xml
+          python manage.py test --verbosity=2
 
       - name: Upload Test Report
         uses: actions/upload-artifact@v3
