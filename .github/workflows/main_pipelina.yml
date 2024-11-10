@@ -1,0 +1,49 @@
+name: Django Main Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run migrations
+        run: |
+          python manage.py migrate
+
+      - name: Run tests
+        run: |
+          python manage.py test
+
+      - name: Collect static files (Django-specific)
+        env:
+          DJANGO_SETTINGS_MODULE: Lab2.settings
+        run: |
+          python manage.py collectstatic --noinput
+
+      - name: Create build artifact
+        run: |
+          zip -r project_artifact.zip . -x "*.git*" "*.github*"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: django-project-artifact
+          path: project_artifact.zip
