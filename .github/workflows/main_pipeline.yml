@@ -34,7 +34,7 @@ jobs:
 
       - name: Collect static files (Django-specific)
         env:
-          DJANGO_SETTINGS_MODULE: Lab2.settings
+          DJANGO_SETTINGS_MODULE: IPS_41_Lab1_django.settings
         run: |
           python manage.py collectstatic --noinput
 
