@@ -33,7 +33,7 @@ jobs:
       # Run the tests and generate an XML report
       - name: Run Unit Tests and Generate XML Report
         run: |
-          pytest products/ --junitxml=test-results.xml --ds=IPS_41_Lab1_django.settings
+          pytest products/tests.py --junitxml=test-results.xml --ds=IPS_41_Lab1_django.settings
 
       # Upload the test report as an artifact
       - name: Upload Test Report
